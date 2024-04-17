@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple RPG Game</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>Let's Play a Simple RPG Game</h1>
+
+    <div id="characterCreation">
+      <form action="">
+        <label for="playerName">Character Name:</label>
+        <input type="text" id="playerName" /> <br /><br />
+
+        <label for="playerClass">Class:</label>
+        <select name="" id="playerClass">
+          <option value="healer">Healer</option>
+          <option value="ranger">Ranger</option>
+          <option value="soldier">Soldier</option></select
+        ><br /><br />
+        <input type="button" value="START" id="startButton" />
+      </form>
+    </div>
+    <div id="gameScreen" class="hidden">
+      <ul>
+        <li id="characterName">Name:</li>
+        <li id="characterClass">Class:</li>
+        <li id="characterWeapon">Weapon:</li>
+        <li id="characterHP">Hit Points:</li>
+        <li id="characterPotions">Potions:</li>
+      </ul>
+      <button id="playerAttack">ATTACK</button>
+      <button id="usePotion">DRINK POTION</button>
+    </div>
+    <script src="rpg.js"></script>
+  </body>
+</html>

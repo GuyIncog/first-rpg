@@ -1,0 +1,21 @@
+body {
+  background-color: rgb(230, 218, 90);
+}
+
+#characterCreation {
+  background-color: grey;
+}
+
+#gameScreen {
+  background-color: darkcyan;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+.hidden {
+  display: none;
+}

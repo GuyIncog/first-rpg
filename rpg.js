@@ -1,5 +1,9 @@
+//List of player character classes
+//Move to separate module later
+//Consider if enemy classes should have a separate module
 const healer = {
-  weapon: "staff",
+  class: "Healer",
+  weapon: "Staff (d6 +2)",
   attackDicePower: 6,
   attackDiceNumber: 1,
   strength: 2,
@@ -9,7 +13,8 @@ const healer = {
 };
 
 const ranger = {
-  weapon: "swords",
+  class: "Ranger",
+  weapon: "Swords (2d6 +2)",
   attackDicePower: 6,
   attackDiceNumber: 2,
   strength: 2,
@@ -19,7 +24,8 @@ const ranger = {
 };
 
 const soldier = {
-  weapon: "warhammer",
+  class: "Soldier",
+  weapon: "Warhammer (d10 +4)",
   attackDicePower: 10,
   attackDiceNumber: 1,
   strength: 4,
@@ -28,8 +34,8 @@ const soldier = {
   hitPoints: 50,
 };
 
+//For attacks
 const rollDie = (numSides) => Math.floor(Math.random() * numSides) + 1;
-
 function multiDiceRoll(numRolls, numSides) {
   const diceRolls = [];
   for (let i = 0; i < numRolls; i++) {
@@ -41,6 +47,7 @@ function multiDiceRoll(numRolls, numSides) {
 class Character {
   constructor(characterName, characterClass) {
     (this.name = characterName),
+      (this.class = characterClass.class),
       (this.weapon = characterClass.weapon),
       (this.attackDicePower = characterClass.attackDicePower),
       (this.attackDiceNumber = characterClass.attackDiceNumber),
@@ -73,4 +80,57 @@ class Character {
   }
 }
 
-const aya = new Character("Aya", soldier);
+//Functions involved in game start
+let playerCharacter;
+
+function createPlayerCharacter() {
+  const playerName = document.getElementById("playerName").value;
+  const playerClass = document.getElementById("playerClass").value;
+  //Converts the string input from the form into a constant for the Character constructor
+  const playerClassAsConstant = {
+    healer: healer,
+    ranger: ranger,
+    soldier: soldier,
+  }[playerClass];
+
+  playerCharacter = new Character(playerName, playerClassAsConstant);
+}
+
+function displayPlayerStats() {
+  const characterName = document.getElementById("characterName");
+  characterName.innerText = `Name: ${playerCharacter.name}`;
+
+  const characterClass = document.getElementById("characterClass");
+  characterClass.innerText = `Class: ${playerCharacter.class}`;
+
+  const characterWeapon = document.getElementById("characterWeapon");
+  characterWeapon.innerText = `Weapon: ${playerCharacter.weapon}`;
+
+  const characterHP = document.getElementById("characterHP");
+  characterHP.innerText = `HP: ${playerCharacter.currentHitPoints} / ${playerCharacter._maxHitPoints}`;
+
+  const characterPotions = document.getElementById("characterPotions");
+  characterPotions.innerText = `Potions: ${playerCharacter.potions}`;
+}
+
+function displayGameScreen() {
+  characterCreation.classList.toggle("hidden");
+  gameScreen.classList.toggle("hidden");
+}
+
+const startButton = document.getElementById("startButton");
+startButton.addEventListener("click", () => {
+  createPlayerCharacter();
+  displayPlayerStats();
+  displayGameScreen();
+});
+
+//TO DO:
+//Potion button functionality (Remember to update the display at the end)
+//Enemy classes
+//HTML for enemy in game screen
+//Attack button functionality
+//Enemy response attack
+
+//NICE TO HAVE:
+//Images for players and enemies
