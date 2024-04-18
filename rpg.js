@@ -44,6 +44,14 @@ function multiDiceRoll(numRolls, numSides) {
   return diceRolls.reduce((sum, roll) => sum + roll, 0);
 }
 
+function updatePlayerMessage(message) {
+  const playerMessage = document.getElementById("playerMessage");
+  playerMessage.innerText = message;
+  setTimeout(() => {
+    playerMessage.innerText = "";
+  }, 2500);
+}
+
 class Character {
   constructor(characterName, characterClass) {
     (this.name = characterName),
@@ -66,16 +74,16 @@ class Character {
 
   usePotion() {
     if (this.currentHitPoints === this._maxHitPoints) {
-      console.log("Health is already full! Don't waste a potion!");
+      updatePlayerMessage("Health is already full! Don't waste a potion!");
     } else if (this.potions === 0) {
-      console.log("Out of healing potions!");
+      updatePlayerMessage("Out of healing potions!");
     } else {
       this.potions -= 1;
       this.currentHitPoints += this._maxHitPoints / 2;
     }
     if (this.currentHitPoints > this._maxHitPoints) {
       this.currentHitPoints = this._maxHitPoints;
-      console.log("Health is now at maximum!");
+      updatePlayerMessage("Health is now at maximum!");
     }
   }
 }
@@ -125,8 +133,13 @@ startButton.addEventListener("click", () => {
   displayGameScreen();
 });
 
+const potionButton = document.getElementById("usePotion");
+potionButton.addEventListener("click", () => {
+  playerCharacter.usePotion();
+  displayPlayerStats();
+});
+
 //TO DO:
-//Potion button functionality (Remember to update the display at the end)
 //Enemy classes
 //HTML for enemy in game screen
 //Attack button functionality
