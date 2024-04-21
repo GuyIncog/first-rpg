@@ -57,6 +57,7 @@ const wolf = {
   hitPoints: 20,
 };
 
+//iterable list to load enemies in order
 const enemyList = [rat, wolf];
 
 function updatePlayerMessage(message) {
@@ -119,6 +120,7 @@ function createPlayerCharacter() {
   playerCharacter = new Character(playerName, playerClassAsConstant);
 }
 
+//refreshes stats after every action
 function displayCharacterStats() {
   const characterName = document.getElementById("characterName");
   characterName.innerText = `Name: ${playerCharacter.name}`;
@@ -184,10 +186,7 @@ function multiDiceRoll(numRolls, numSides) {
 
 function attack(attacker, receiver) {
   if (receiver.currentHitPoints > 0 && attacker.currentHitPoints > 0) {
-    let attackDamage =
-      multiDiceRoll(attacker.attackDiceNumber, attacker.attackDicePower) +
-      attacker.strength -
-      receiver.armor;
+    let attackDamage = attacker.attack() - receiver.armor;
     attackDamage > 0
       ? (receiver.currentHitPoints -= attackDamage)
       : (attackDamage = 0);
@@ -233,7 +232,9 @@ nextFightButton.addEventListener("click", () => {
 //TO DO:
 //Make more enemies
 //Stylize the win screen
+//Consider rebalancing characters
 
 //NICE TO HAVE:
 //Images for players and enemies
-//Change updatePlayerMessage to do a css class fadeout instead of setTimeOut
+//Figure out how to put a time gap between player attack and enemy attack
+//without totally breaking the game
