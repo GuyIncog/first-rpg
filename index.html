@@ -24,17 +24,33 @@
       </form>
     </div>
     <div id="gameScreen" class="hidden">
-      <ul>
-        <li id="characterName">Name:</li>
-        <li id="characterClass">Class:</li>
-        <li id="characterWeapon">Weapon:</li>
-        <li id="characterHP">Hit Points:</li>
-        <li id="characterPotions">Potions:</li>
-      </ul>
-      <button id="playerAttack">ATTACK</button>
-      <button id="usePotion">DRINK POTION</button>
-      <p>Info: <span id="playerMessage"></span></p>
+      <div class="characterWindow" id="playerWindow">
+        <ul>
+          <li id="characterName">Name:</li>
+          <li id="characterClass">Class:</li>
+          <li id="characterWeapon">Weapon:</li>
+          <li id="characterArmor">Armor:</li>
+          <li id="characterHP">Hit Points:</li>
+          <li id="characterPotions">Potions:</li>
+        </ul>
+        <br />
+        <button id="playerAttack">ATTACK</button>
+        <button id="usePotion">DRINK POTION</button>
+        <p>Info: <span id="playerMessage"></span></p>
+      </div>
+      <div class="characterWindow" id="enemyWindow">
+        <ul>
+          <li id="enemyClass">Class:</li>
+          <li id="enemyWeapon">Weapon:</li>
+          <li id="enemyArmor">Armor:</li>
+          <li id="enemyHP">Hit Points:</li>
+          <li id="enemyPotions">Potions:</li>
+          <br />
+          <button id="nextFight" class="hidden">NEXT FIGHT</button>
+        </ul>
+      </div>
+      <p id="winScreen">YOU WIN!!!</p>
     </div>
-    <script src="rpg.js"></script>
+    <script src="app.js"></script>
   </body>
 </html>

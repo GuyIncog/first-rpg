@@ -2,20 +2,36 @@ body {
   background-color: rgb(230, 218, 90);
 }
 
-#characterCreation {
-  background-color: grey;
-}
-
-#gameScreen {
-  background-color: darkcyan;
-}
-
 ul {
   padding: 0;
   margin: 0;
   list-style-type: none;
 }
 
+#characterCreation {
+  background-color: grey;
+  width: 600px;
+}
+
+#gameScreen {
+  display: flex;
+  width: 600px;
+  background-color: darkcyan;
+  padding: 5px;
+}
+
+.characterWindow {
+  background-color: darkgreen;
+  width: 200px;
+  padding: 10px 10px 0px 10px;
+  margin: 10px;
+  border: 2px double black;
+}
+
 .hidden {
+  visibility: hidden;
+}
+
+#winScreen {
   display: none;
 }
