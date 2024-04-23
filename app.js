@@ -1,6 +1,4 @@
 //List of player character classes
-//Move to separate module later
-//Consider if enemy classes should have a separate module
 const healer = {
   class: "Healer",
   weapon: "Staff (d6 +2)",
@@ -57,8 +55,30 @@ const wolf = {
   hitPoints: 20,
 };
 
+const bandit = {
+  class: "Bandit",
+  weapon: "Shank (d8 +2)",
+  attackDicePower: 8,
+  attackDiceNumber: 1,
+  strength: 2,
+  armor: 2,
+  potions: 1,
+  hitPoints: 30,
+};
+
+const wizard = {
+  class: "Wizard",
+  weapon: "Fireball (2d8)",
+  attackDicePower: 8,
+  attackDiceNumber: 2,
+  strength: 0,
+  armor: 1,
+  potions: 2,
+  hitPoints: 20,
+};
+
 //iterable list to load enemies in order
-const enemyList = [rat, wolf];
+const enemyList = [rat, wolf, bandit, wizard];
 
 function updatePlayerMessage(message) {
   const playerMessage = document.getElementById("playerMessage");
@@ -200,12 +220,22 @@ const nextFightButton = document.getElementById("nextFight");
 const attackButton = document.getElementById("playerAttack");
 attackButton.addEventListener("click", () => {
   attack(playerCharacter, enemyCharacter);
+  //if enemy dies
   if (enemyCharacter.currentHitPoints < 1) {
     nextFightButton.style.visibility = "visible";
     updatePlayerMessage("Victory!");
   } else {
+    //check if enemy should use a potion
+    if (
+      enemyCharacter.potions > 0 &&
+      enemyCharacter.currentHitPoints < enemyCharacter._maxHitPoints / 2
+    ) {
+      enemyCharacter.usePotion();
+    }
+    //enemy attacks no matter what
     attack(enemyCharacter, playerCharacter);
   }
+  //check for player death
   if (playerCharacter.currentHitPoints < 1) {
     updatePlayerMessage("You died! Try again.");
   }
@@ -217,7 +247,7 @@ nextFightButton.addEventListener("click", () => {
     loadEnemy(enemyList[currentEnemy]);
     playerCharacter.potions += playerCharacter._potionRestock;
     displayCharacterStats();
-    updatePlayerMessage(`A ${enemyCharacter.class} has appeared!`);
+    updatePlayerMessage(`${enemyCharacter.class} has appeared!`);
     nextFightButton.style.visibility = "hidden";
   } else {
     const playerWindow = document.getElementById("playerWindow");

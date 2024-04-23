@@ -1,5 +1,13 @@
 body {
   background-color: rgb(230, 218, 90);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  max-width: max-content;
+  margin: auto;
+}
+
+h1 {
+  max-width: max-content;
+  margin: auto;
 }
 
 ul {
@@ -34,4 +42,8 @@ ul {
 
 #winScreen {
   display: none;
+  font-size: 5em;
+  font-weight: bold;
+  max-width: max-content;
+  margin: auto;
 }
